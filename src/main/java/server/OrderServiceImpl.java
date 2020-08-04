@@ -29,20 +29,4 @@ public class OrderServiceImpl extends OrderServiceGrpc.OrderServiceImplBase {
         System.out.println("Response sent successfully");
     }
 
-    /* @Override
-    public void getUserPurchaseHistory(OrderRequest request, StreamObserver<OrderResponse> responseObserver) {
-        UserDetails user= UserList.getUserInfo(request.getAccountId());
-        List<String> prodList= OrderMappings.getProductList(user.getOrderIdList().toString());
-        List<Products> products= ProductList.getProducts(prodList);
-
-        Orders order1= Orders.newBuilder().setUser(UserDetails.newBuilder(user)).addAllProducts(products).build();
-
-        List<Orders> orders= new ArrayList<>();
-        orders.add(order1);
-
-        OrderResponse orderResponse=OrderResponse.newBuilder().addAllOrders(orders).build();
-        responseObserver.onNext(orderResponse);
-        responseObserver.onCompleted();
-        System.out.println("Response sent successfully");
-    }*/
 }
