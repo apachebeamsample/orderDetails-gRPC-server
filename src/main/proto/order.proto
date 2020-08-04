@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package order;
+
+option java_package = "com.order.generated.stubs";
+option java_multiple_files = true;
+
+message OrdersByDateRangeRequest {
+  Date orderPlacedStartDate=1;
+  Date orderPlacedEndDate=2;
+}
+
+message OrdersByDateRangeResponse {
+  repeated OrderList orderList=1;
+}
+
+message OrderList{
+  OrderDetails orderDetails=1;
+  UserDetails user=2;
+  repeated  ProductDetails products=3;
+}
+
+message UserPurchaseHistoryRequest {
+  string accountId=1;
+}
+
+message UserPurchaseHistoryResponse{
+  repeated UserPurchaseHistory userPurcHist=1;
+}
+
+message UserPurchaseHistory{
+  UserDetails user=1;
+  repeated  ProductDetails products=2;
+}
+
+message Date{
+  int32 year=1;
+  int32 month=2;
+  int32 day=3;
+}
+
+message OrderDetails{
+  string orderId=1;
+  Date orderDate=2;
+  Date deliveryDate=3;
+  string orderStatus=4;
+}
+
+message UserDetails{
+  string accountId=1;
+  string userName=2;
+  repeated string orderIds=3;
+  repeated Address address=4;
+}
+
+message ProductDetails{
+  string productId=1;
+  string productName=2;
+  int64 price=3;
+}
+
+message Address{
+  string addressType=1;
+  string houseNumber=2;
+  int64 phone=3;
+}
+
+service OrderService{
+  rpc getOrderDetailsByDateRange(OrdersByDateRangeRequest) returns (OrdersByDateRangeResponse) {};
+
+  rpc getUserPurchaseHistory(UserPurchaseHistoryRequest) returns (UserPurchaseHistoryResponse) {};
+}
